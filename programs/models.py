@@ -23,10 +23,10 @@ class Program(models.Model):
         ('inactive', 'Inactive'),
     ]
 
-    program_code = models.CharField(max_length=20, unique=True, blank=True)
+    program_code = models.CharField(max_length=20, unique=True)
     program_title = models.CharField(max_length=200)
     description = models.TextField()
-    cover_image = models.CharField(max_length=500, blank=True)
+    cover_image = models.ImageField()
     # price = models.DecimalField(max_digits=12, decimal_places=2)
     # payment_type = models.CharField(max_length=20)
     duration = models.CharField(max_length=100, choices=DURATION_CHOICE, default='12 months')
@@ -77,7 +77,7 @@ class PaymentPlan(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["program", "plan"],
+                fields=["program", "plan_type"],
                 name="unique_program_payment_plan"
             )
         ]

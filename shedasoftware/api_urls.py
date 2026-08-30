@@ -34,4 +34,7 @@ urlpatterns = [
 
     # Student: own profile
     path('student/profile/', student_views.StudentProfileView.as_view()),
+
+    # Programs
+    path('programs.php', program_views.ProgramListView.as_view())
 ]

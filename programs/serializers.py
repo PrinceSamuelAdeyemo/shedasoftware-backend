@@ -13,8 +13,7 @@ class ProgramDetailSerializer(serializers.ModelSerializer):
         model = Program
         fields = [
             'id', 'program_code', 'program_title', 'description',
-            'cover_image', 'price', 'payment_type', 'duration',
-            'status', 'instructors', 'created_at',
+            'cover_image', 'duration', 'status', 'instructors', 'created_at',
         ]
 
 
@@ -23,8 +22,7 @@ class ProgramListSerializer(serializers.ModelSerializer):
         model = Program
         fields = [
             'id', 'program_code', 'program_title', 'description',
-            'cover_image', 'price', 'payment_type', 'duration',
-            'status', 'created_at',
+            'cover_image', 'duration', 'status', 'instructors', 'created_at',
         ]
 
 
@@ -32,8 +30,8 @@ class ProgramCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Program
         fields = [
-            'program_title', 'description', 'cover_image',
-            'price', 'payment_type', 'duration', 'status', 'instructors',
+            'id', 'program_code', 'program_title', 'description',
+            'cover_image', 'duration', 'status', 'instructors', 'created_at',
         ]
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Program, AssessmentQuestion
+from .models import Program, Assessment, AssessmentQuestion, AssessmentAnswer
 
 
 class AssessmentQuestionInline(admin.TabularInline):
@@ -9,15 +9,26 @@ class AssessmentQuestionInline(admin.TabularInline):
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ['program_code', 'program_title', 'payment_type', 'price', 'duration', 'status', 'created_at']
-    list_filter = ['payment_type', 'status']
+    list_display = ['program_code', 'program_title', 'duration', 'status', 'created_at']
+    list_filter = ['status']
     search_fields = ['program_code', 'program_title']
-    readonly_fields = ['program_code', 'created_at']
-    inlines = [AssessmentQuestionInline]
+    readonly_fields = ['created_at']
+    #inlines = [AssessmentQuestionInline]
 
+
+@admin.register(Assessment)
+class AssessmmentAdmin(admin.ModelAdmin):
+    list_display = ['program', 'title', 'created_at']
+    search_fields = ['program', 'title']
 
 @admin.register(AssessmentQuestion)
 class AssessmentQuestionAdmin(admin.ModelAdmin):
-    list_display = ['program', 'question', 'created_at']
-    list_filter = ['program']
-    search_fields = ['question', 'program__program_title']
+    list_display = ['assessment', 'question', 'created_at']
+    list_filter = ['assessment']
+    search_fields = ['question']
+
+@admin.register(AssessmentAnswer)
+class AssessmentAnswerAdmin(admin.ModelAdmin):
+    list_display = ['question', 'text_answer', 'answered_at']
+    list_filter = ['question']
+    search_fields = ['question']

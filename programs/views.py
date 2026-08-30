@@ -24,15 +24,21 @@ def err(message, http_status=status.HTTP_400_BAD_REQUEST):
 class ProgramDetailView(APIView):
 
     def get(self, request):
-        code = request.query_params.get('code')
-        if not code:
-            return err('program_code is required.')
+        #code = request.query_params.get('code')
+        #if not code:
+        #    return err('program_code is required.')
         try:
-            program = Program.objects.get(program_code=code)
+            #program = Program.objects.get(program_code=code)
+            program = Program.objects.all()
         except Program.DoesNotExist:
             return err('Program not found.', status.HTTP_404_NOT_FOUND)
         return ok(ProgramDetailSerializer(program).data)
 
+class ProgramListView(APIView):
+
+    def get(self, request):
+        program = Program.objects.all()
+        return ok(ProgramListSerializer(program, many=True).data)
 
 class AssessmentQuestionsView(APIView):
 
@@ -55,8 +61,9 @@ class AdminProgramListView(APIView):
 
     def get(self, request):
         qs = Program.objects.all().order_by('-created_at')
-
+        print('hello')
         search = request.query_params.get('search', '').strip()
+        print('search params', search)
         payment_type = request.query_params.get('paymentType', '').strip()
 
         if search:
