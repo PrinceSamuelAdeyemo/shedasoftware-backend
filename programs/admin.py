@@ -23,7 +23,7 @@ class AssessmmentAdmin(admin.ModelAdmin):
 
 @admin.register(AssessmentQuestion)
 class AssessmentQuestionAdmin(admin.ModelAdmin):
-    list_display = ['assessment', 'question', 'created_at']
+    list_display = ['id', 'assessment', 'question', 'created_at']
     list_filter = ['assessment']
     search_fields = ['question']
 

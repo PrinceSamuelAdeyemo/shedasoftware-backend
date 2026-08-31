@@ -121,7 +121,7 @@ class AssessmentQuestion(models.Model):
     )
 
     def __str__(self):
-        return self.question
+        return f"{self.id} - {self.question}"
 
 
 class AssessmentAnswer(models.Model):
