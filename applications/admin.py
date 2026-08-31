@@ -28,4 +28,4 @@ class ApplicationAdmin(admin.ModelAdmin):
 @admin.register(AssessmentAnswer)
 class AssessmentAnswerAdmin(admin.ModelAdmin):
     list_display = ['application', 'question']
-    search_fields = ['application__email', 'question']
+    search_fields = ['application__email', 'question__question']
