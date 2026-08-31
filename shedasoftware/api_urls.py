@@ -8,6 +8,9 @@ urlpatterns = [
     # Auth (login, password reset, email verify, application signup)
     path('auth/', include('accounts.urls')),
 
+    # Public: apply
+    path('auth/application.signup', application_views.ApplicationCreateView.as_view()),
+
     # Public: program detail & assessment questions
     path('program.detail.php', program_views.ProgramDetailView.as_view()),
     path('assessment.php', program_views.AssessmentQuestionsView.as_view()),
