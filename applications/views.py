@@ -5,6 +5,7 @@ from rest_framework import status
 
 from .models import Application
 from .serializers import (
+    ApplicationCreateSerializer,
     ApplicationListSerializer,
     ApplicationDetailSerializer,
     ApplicationStatusUpdateSerializer,
@@ -82,3 +83,17 @@ class ApplicantDetailView(APIView):
 
         serializer.save()
         return ok(ApplicationDetailSerializer(application).data)
+
+
+class ApplicationCreateView(APIView):
+    """POST /auth/application.signup — public endpoint for applicants to submit an application."""
+
+    def post(self, request):
+        serializer = ApplicationCreateSerializer(data=request.data)
+        if not serializer.is_valid():
+            return err(serializer.errors)
+        application = serializer.save()
+        return ok({
+            'applicant_id': application.applicant_id,
+            'message': 'Application submitted successfully.',
+        })
