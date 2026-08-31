@@ -35,11 +35,11 @@ class Application(models.Model):
     def __str__(self):
         return f'{self.full_name} → {self.program.program_title} ({self.status})'
 
-
 class AssessmentAnswer(models.Model):
     application = models.ForeignKey(Application, on_delete=models.CASCADE, related_name='assessment_answers')
-    question = models.TextField()
+    question = models.ForeignKey('programs.AssessmentQuestion', on_delete=models.CASCADE)
     answer = models.TextField()
 
     def __str__(self):
-        return f'[{self.application.applicant_id}] {self.question[:50]}'
+        return f'[{self.application.applicant_id}] {self.question.question[:50]}'
+
